@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DronesPlan.Api/DronesPlan.Api.csproj" />
+    <Project Path="src/DronesPlan.DAL/DronesPlan.DAL.csproj" />
+    <Project Path="src/DronesPlan.Domain/DronesPlan.Domain.csproj" />
+    <Project Path="src/DronesPlan.Infrastructure/DronesPlan.Infrastructure.csproj" />
+  </Folder>
+</Solution>
