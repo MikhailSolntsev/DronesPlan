@@ -1,4 +1,4 @@
-namespace DronesPlan.DAL.Entities;
+namespace DronesPlan.Domain.Entities;
 
 /// <summary>
 /// Тип задачи в Jira.

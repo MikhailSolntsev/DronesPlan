@@ -1,4 +1,4 @@
-using DronesPlan.DAL.Entities;
+﻿using DronesPlan.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

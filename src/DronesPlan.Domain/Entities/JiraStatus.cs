@@ -1,4 +1,4 @@
-namespace DronesPlan.DAL.Entities;
+namespace DronesPlan.Domain.Entities;
 
 /// <summary>
 /// Статус задачи в Jira.

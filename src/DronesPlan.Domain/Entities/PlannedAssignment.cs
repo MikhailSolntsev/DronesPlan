@@ -1,4 +1,4 @@
-namespace DronesPlan.DAL.Entities;
+namespace DronesPlan.Domain.Entities;
 
 /// <summary>
 /// Плановое назначение исполнителя на задачу на конкретную дату.

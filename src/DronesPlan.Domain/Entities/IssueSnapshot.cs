@@ -1,4 +1,4 @@
-namespace DronesPlan.DAL.Entities;
+namespace DronesPlan.Domain.Entities;
 
 /// <summary>
 /// Снапшот задачи Jira в момент синхронизации.

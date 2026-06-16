@@ -1,34 +1,33 @@
+﻿using DronesPlan.DAL;
+using DronesPlan.DAL.Repositories;
+using DronesPlan.Domain.Interfaces;
+using DronesPlan.Domain.Services;
+using DronesPlan.Domain.Configuration;
+using DronesPlan.Infrastructure.Clients;
+using DronesPlan.Infrastructure.Configuration;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<DronesPlanDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
+builder.Services.AddScoped<ITrackedIssueRepository, TrackedIssueRepository>();
+builder.Services.AddScoped<IPlannedAssignmentRepository, PlannedAssignmentRepository>();
+
+builder.Services.Configure<StatusMappingOptions>(builder.Configuration.GetSection("StatusMapping"));
+builder.Services.AddScoped<ISnapshotService, SnapshotService>();
+
+builder.Services.Configure<JiraOptions>(builder.Configuration.GetSection(JiraOptions.SectionName));
+builder.Services.AddHttpClient<IJiraClient, JiraClient>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+app.MapGet("/api/status", () => Results.Ok(new { Status = "Running" }));
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
